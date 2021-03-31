@@ -28,15 +28,25 @@ int main(int argc, char *argv[])
     }
 
     SGraph g;
+    SolvedSGraph sg;
 
-    g = rgg_simple(N);
-    Perm p = random_perm(N);
+    /* for (int i = 0; i < 10; ++i) { */
+    /*     sg = rrgg_artfren_metric10(N); */
+    /*     printf("%d, ", is_metric(sg.g)); */
+    /* } */
+    /* printf("\n"); */
 
-    print_perm(p);
-    two_opt_inplace(g, p, -1);
+    sg = rrgg_artfren_metric10(N);
     printf("--------------------\n");
-    print_sgraph(g);
+    print_sgraph_D(sg.g);
     printf("--------------------\n");
-    print_perm(p);
+    print_perm(sg.p);
+    printf("--------------------\n");
+    printf("%d\n", is_metric(sg.g));
 
+    /* g = rgg_simple10(N); */
+    /* printf("--------------------\n"); */
+    /* print_sgraph_D(g); */
+    /* printf("--------------------\n"); */
+    /* printf("%d\n", is_metric(g)); */
 }
