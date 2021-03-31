@@ -2,10 +2,11 @@ project('TSPJokes', 'c')
 
 tspJokesInc = include_directories('TSPJokes/include')
 tspJokesSrc = [
+  'TSPJokes/src/algorithms.c',
   'TSPJokes/src/common.c',
   'TSPJokes/src/graph.c',
-  'TSPJokes/src/algorithms.c',
   'TSPJokes/src/rggs.c',
+  'TSPJokes/src/util.c',
   ]
 
 tspJokesLib = library('TSPJokes',
