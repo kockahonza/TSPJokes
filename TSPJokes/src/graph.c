@@ -86,6 +86,8 @@ Perm make_perm(int n, int* P) {
     for (int i = 0; i < n; ++i) {
         if ((P[i] < 0) || (P[i] >= n) || (check[P[i]])) {
             error42("graph.c:make_perm: The permutation isn't valid, either there is an element outisde the range [0, n) or not all elements are present\n");
+        } else {
+            check[P[i]] = 1;
         }
     }
     free(check);
@@ -121,4 +123,18 @@ Perm random_perm(int n) {
     }
 
     return p;
+}
+
+
+int perm_graph_score(SGraph g, Perm p) {
+#if SAFE
+    if (g.n != p.n) {
+        error42("graph.c:perm_graph_score: The given graph and permutation have different n.");
+    }
+#endif
+    int total = get_dist(g, p.P[g.n-1], p.P[0]);
+    for (int i = 0; i < g.n-1; ++i) {
+        total += get_dist(g, p.P[i], p.P[i+1]);
+    }
+    return total;
 }
