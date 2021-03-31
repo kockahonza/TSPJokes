@@ -15,10 +15,11 @@ SGraph make_sgraph(int n, int** D);
 SGraph make_sgraph_copyD(int n, int** D);
 
 
-void print_sgraph(SGraph g);
-
 int get_dist(SGraph g, int i, int j);
 
+void print_sgraph(SGraph g);
+
+int is_metric(SGraph g);
 
 
 Perm make_perm(int n, int* P);

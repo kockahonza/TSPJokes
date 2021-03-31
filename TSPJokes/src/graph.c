@@ -36,6 +36,15 @@ SGraph make_sgraph_copyD(int n, int** D) {
     return make_sgraph(n, copiedD);
 }
 
+int get_dist(SGraph g, int i, int j) {
+#if SAFE
+    if ((i < 0) || (j < 0) || (j >= g.n) || (i >= g.n)) {
+        error42("graph.c:get_dist: Either i or j were outside the [0, n) range.");
+    }
+#endif
+    return g.D[i][j];
+}
+
 void print_sgraph(SGraph g) {
     for (int i = 0; i < g.n; ++i) {
         for (int o = 0; o <= i; ++o) {
@@ -48,13 +57,19 @@ void print_sgraph(SGraph g) {
     }
 }
 
-int get_dist(SGraph g, int i, int j) {
-#if SAFE
-    if ((i < 0) || (j < 0) || (j >= g.n) || (i >= g.n)) {
-        error42("graph.c:get_dist: Either i or j were outside the [0, n) range.");
+int is_metric(SGraph g) {
+    for (int i = 0; i < g.n; ++i) {
+        for (int o = i+1; o < g.n; ++o) {
+            for (int p = o+1; p < g.n; ++p) {
+                if (((g.D[i][o] + g.D[o][p]) < g.D[i][p]) ||
+                    ((g.D[i][p] + g.D[p][o]) < g.D[i][o]) ||
+                    ((g.D[o][i] + g.D[i][p]) < g.D[o][p])) {
+                    return 0;
+                }
+            }
+        }
     }
-#endif
-    return g.D[i][j];
+    return 1;
 }
 
 
@@ -75,6 +90,7 @@ Perm make_perm(int n, int* P) {
             error42("graph.c:make_perm: The permutation isn't valid, either there is an element outisde the range [0, n) or not all elements are present\n");
         }
     }
+    free(check);
 #endif
     return p;
 }
@@ -98,7 +114,6 @@ Perm random_perm(int n) {
     p.P = malloc(n*sizeof(int));
 
     int j;
-    int temp;
     for (int i = 0; i < n; ++i) {
         j = rand() % (i+1);
         if  (j != i) {
