@@ -45,12 +45,10 @@ int get_dist(SGraph g, int i, int j) {
     return g.D[i][j];
 }
 
-void print_sgraph(SGraph g) {
+void print_sgraph_D(SGraph g) {
     for (int i = 0; i < g.n; ++i) {
-        for (int o = 0; o <= i; ++o) {
-            printf("\t");
-        }
-        for (int o = i+1; o < g.n; ++o) {
+        for (int o = 0; o < g.n; ++o) {
+            /* printf("\t"); */
             printf("%d\t", get_dist(g, i, o));
         }
         printf("\n");

@@ -17,7 +17,7 @@ SGraph make_sgraph_copyD(int n, int** D);
 
 int get_dist(SGraph g, int i, int j);
 
-void print_sgraph(SGraph g);
+void print_sgraph_D(SGraph g);
 
 int is_metric(SGraph g);
 
