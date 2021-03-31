@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
         yy[i] = xx[i];
     }
 
+    Perm p;
     SGraph g;
     SolvedSGraph sg;
 
@@ -40,7 +41,16 @@ int main(int argc, char *argv[])
     printf("--------------------\n");
     print_sgraph_D(sg.g);
     printf("--------------------\n");
+    printf("%d-\t", perm_graph_score(sg.g, sg.p));
     print_perm(sg.p);
+    printf("--------------------\n");
+    p = two_opt_from_random(sg.g, -1);
+    printf("%d-\t", perm_graph_score(sg.g, p));
+    print_perm(p);
+    printf("--------------------\n");
+    p = greedy(sg.g);
+    printf("%d-\t", perm_graph_score(sg.g, p));
+    print_perm(p);
     printf("--------------------\n");
     printf("%d\n", is_metric(sg.g));
 
