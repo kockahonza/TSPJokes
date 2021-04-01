@@ -126,15 +126,19 @@ Perm random_perm(int n) {
 }
 
 
-int perm_graph_score(SGraph g, Perm p) {
+int P_score_on_sgraph(SGraph g, int* P) {
+    int total = get_dist(g, P[g.n-1], P[0]);
+    for (int i = 0; i < g.n-1; ++i) {
+        total += get_dist(g, P[i], P[i+1]);
+    }
+    return total;
+}
+
+int perm_score_on_sgraph(SGraph g, Perm p) {
 #if SAFE
     if (g.n != p.n) {
         error42("graph.c:perm_graph_score: The given graph and permutation have different n.");
     }
 #endif
-    int total = get_dist(g, p.P[g.n-1], p.P[0]);
-    for (int i = 0; i < g.n-1; ++i) {
-        total += get_dist(g, p.P[i], p.P[i+1]);
-    }
-    return total;
+    return P_score_on_sgraph(g, p.P);
 }

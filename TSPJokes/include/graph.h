@@ -30,6 +30,7 @@ void print_perm(Perm p);
 Perm random_perm(int n);
 
 
-int perm_graph_score(SGraph g, Perm p);
+int P_score_on_sgraph(SGraph g, int* P);
+int perm_score_on_sgraph(SGraph g, Perm p);
 
 #endif
