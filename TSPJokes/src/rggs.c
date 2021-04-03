@@ -65,7 +65,11 @@ SolvedSGraph rrgg_artfren(int n, int R) {
         for (int o = i+1; o < n; ++o) {
             if (D[i][o] == -1) {
                 temp = A[i] + A[o];
-                D[i][o] = D[o][i] = temp + (rand() % (R - temp));
+                if (temp == R) {
+                    D[i][o] = D[o][i] = temp;
+                } else {
+                    D[i][o] = D[o][i] = temp + (rand() % (R - temp));
+                }
             }
         }
     }
