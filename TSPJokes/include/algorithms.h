@@ -3,8 +3,9 @@
 
 #include "graph.h"
 
-void two_opt_inplace(SGraph g, Perm p, int k);
+Perm exact_branch_bound(SGraph g);
 
+void two_opt_inplace(SGraph g, Perm p, int k);
 Perm two_opt_from_random(SGraph g, int k);
 
 Perm greedy(SGraph g);

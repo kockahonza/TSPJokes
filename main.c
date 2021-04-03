@@ -7,7 +7,7 @@
 #include "rggs.h"
 #include "algorithms.h"
 
-int N = 5;
+int N = 12;
 
 int xx[4][4] = {
     {0, 1, 2, 3},
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 {
     greetings();
 
-    srand(time(NULL));
+    srand(time(NULL) + clock());
 
     int** yy = malloc(4*sizeof(int*));
     for (int i = 0; i < 4; ++i) {
@@ -37,22 +37,40 @@ int main(int argc, char *argv[])
     /* } */
     /* printf("\n"); */
 
-    sg = rrgg_artfren_metric10(N);
+    sg = rrgg_artfren10(N);
+
     printf("--------------------\n");
+
     print_sgraph_D(sg.g);
     printf("--------------------\n");
+
     printf("%d-\t", perm_score_on_sgraph(sg.g, sg.p));
     print_perm(sg.p);
-    printf("--------------------\n");
-    p = two_opt_from_random(sg.g, -1);
+    /* printf("--------------------\n"); */
+
+    /* p = two_opt_from_random(sg.g, -1); */
+    /* printf("%d-\t", perm_score_on_sgraph(sg.g, p)); */
+    /* print_perm(p); */
+    /* printf("--------------------\n"); */
+
+    /* p = greedy(sg.g); */
+    /* printf("%d-\t", perm_score_on_sgraph(sg.g, p)); */
+    /* print_perm(p); */
+    /* printf("--------------------\n"); */
+
+    p = exact_branch_bound(sg.g);
     printf("%d-\t", perm_score_on_sgraph(sg.g, p));
     print_perm(p);
+    /* printf("--------------------\n"); */
+
+    /* printf("%d\n", is_metric(sg.g)); */
+
     printf("--------------------\n");
-    p = greedy(sg.g);
-    printf("%d-\t", perm_score_on_sgraph(sg.g, p));
-    print_perm(p);
+
     printf("--------------------\n");
-    printf("%d\n", is_metric(sg.g));
+
+    print_sgraph_D(sg.g);
+    printf("--------------------\n");
 
     /* g = rgg_simple10(N); */
     /* printf("--------------------\n"); */

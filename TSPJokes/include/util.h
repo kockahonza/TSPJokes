@@ -1,17 +1,11 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-// Single-linked-list cell
-typedef struct SLLCell {
+// Cell struct for a doubly-linked-list of integers
+typedef struct IntDLL {
+    struct IntDLL* prev;
     int val;
-    struct SLLCell* next;
-} SLLCell;
-
-// Doubly-linked-list cell
-typedef struct DLLCell {
-    struct DLLCell* prev;
-    int val;
-    struct DLLCell* next;
-} DLLCell;
+    struct IntDLL* next;
+} IntDLL;
 
 #endif
